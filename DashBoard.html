@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="style3.css">
+</head>
+<body>
+    <!-- Sidebar for Menu -->
+    <div id="sidebar">
+        <div class="menu-icon" onclick="toggleMenu()">☰</div>
+        <div class="menu-content">
+            <h3>User: <span id="userName">[User Name]</span></h3>
+            <a href="#" class="menu-item">Posts</a>
+            <a href="#" class="menu-item">New Post</a>
+            <a href="#" class="menu-item" onclick="viewBlog()">View Blog</a> <!-- Added View Blog -->
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Top Navigation Bar -->
+        <nav>
+            <div class="logo">
+                <img src="your_logo.png" alt="Logo" />
+            </div>
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search posts...">
+                <button onclick="searchPosts()">Search</button>
+            </div>
+            <div class="user-profile">
+                <img src="profile_picture.png" alt="User Profile" id="userProfile">
+            </div>
+        </nav>
+
+        <!-- Post List Section -->
+        <div class="posts-section" id="postsSection">
+            <h2>Your Posts</h2>
+            <!-- Posts will dynamically load here -->
+            <div id="postsContainer">
+                <!-- Sample post -->
+                <div class="post" onclick="showPostDetails()">
+                    <h3>Sample Post Title</h3>
+                    <p>Published on: <span>10 Sept</span></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog View Section (Initially Hidden) -->
+        <div class="view-blog-section" id="viewBlogSection" style="display: none;">
+            <h2>Blog Post Title</h2>
+            <p>Published on: <span>10 Sept</span></p>
+            <p>This is a detailed view of the blog post.</p>
+
+            <!-- Audio/Video Embed Section -->
+            <h3>Media:</h3>
+            <audio controls>
+                <source src="audio_sample.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <br>
+            <video width="320" height="240" controls>
+                <source src="video_sample.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+            <button onclick="backToPosts()">Back to Posts</button>
+        </div>
+    </div>
+
+    <script src="script1.js"></script>
+</body>
+</html>

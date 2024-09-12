@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Blog Editor with Image Upload and Preview</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+        }
+
+        .toolbar button {
+            padding: 8px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .toolbar button:hover {
+            background-color: #f1f1f1;
+        }
+
+        .content-area {
+            border: 1px solid #ccc;
+            padding: 10px;
+            min-height: 300px;
+            margin-top: 20px;
+            font-size: 16px;
+            background-color: #ffffff;
+        }
+
+        .content-area[contenteditable="true"]:empty:before {
+            content: 'Type your post here...';
+            color: #aaa;
+        }
+
+        .update-btn, .preview-btn {
+            background-color: orange;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        .update-btn:hover, .preview-btn:hover {
+            background-color: darkorange;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Preview layout styling */
+        .preview-container {
+            max-width: 900px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #333;
+            text-align: center;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #666;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header with Logo and Toolbar -->
+    <header class="header">
+        <div class="logo">
+            <img src="your-logo-url-here.png" alt="Blog Logo">
+        </div>
+        <div class="toolbar">
+            <button onclick="formatText('bold')">Bold</button>
+            <button onclick="formatText('italic')">Italic</button>
+            <button onclick="formatText('underline')">Underline</button>
+            <button onclick="insertLink()">Link</button>
+            <button onclick="document.getElementById('file-input').click()">Upload Image</button>
+            <input type="file" id="file-input" class="file-input" accept="image/*" onchange="uploadImage(event)">
+        </div>
+    </header>
+
+    <!-- Editable Content Area -->
+    <div class="content-area" contenteditable="true"></div>
+
+    <!-- Buttons for Preview and Update -->
+    <div class="btn-container">
+        <button class="preview-btn" onclick="previewPost()">Preview</button>
+        <button class="update-btn" onclick="updatePost()">Update</button>
+    </div>
+
+    <!-- Output Section (where the post content will be displayed after updating) -->
+    <div class="output" id="output"></div>
+
+    <script>
+        // Function to apply formatting (Bold, Italic, Underline)
+        function formatText(command) {
+            document.execCommand(command, false, null);
+        }
+
+        // Function to insert a hyperlink
+        function insertLink() {
+            let url = prompt("Enter the link URL:", "https://");
+            if (url) {
+                document.execCommand("createLink", false, url);
+            }
+        }
+
+        // Function to handle image uploads from local folder
+        function uploadImage(event) {
+            const file = event.target.files[0]; // Get the selected file
+            const reader = new FileReader();
+
+            // Load the image as a base64 string
+            reader.onload = function(e) {
+                const imgBase64 = e.target.result;
+                insertImageToEditor(imgBase64);
+            };
+
+            if (file) {
+                reader.readAsDataURL(file); // Convert the image file to a base64 string
+            }
+        }
+
+        // Function to insert the base64 image into the content area
+        function insertImageToEditor(imageUrl) {
+            const imgTag = `<img src="${imageUrl}" alt="Uploaded Image" style="max-width: 100%;"/>`;
+            document.execCommand("insertHTML", false, imgTag);
+        }
+
+        // Function to handle the Update action (formerly Publish)
+        function updatePost() {
+            let content = document.querySelector('.content-area').innerHTML;
+            // Message saying "Post updated!" without showing the preview immediately
+            alert("Post updated!");
+        }
+
+        // Function to handle the Preview action
+        function previewPost() {
+            let content = document.querySelector('.content-area').innerHTML;
+
+            // Open a new tab for preview
+            let previewWindow = window.open("", "_blank");
+            previewWindow.document.write(`
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Post Preview</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            padding: 20px;
+                            background-color: #f4f4f4;
+                        }
+                        .preview-container {
+                            max-width: 900px;
+                            margin: 20px auto;
+                            background-color: white;
+                            padding: 20px;
+                            border-radius: 10px;
+                            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        }
+                        .preview-image {
+                            width: 100%;
+                            max-height: 300px;
+                            object-fit: cover;
+                            border-radius: 10px;
+                        }
+                        h1 {
+                            font-size: 28px;
+                            color: #333;
+                            text-align: center;
+                        }
+                        p {
+                            font-size: 16px;
+                            line-height: 1.6;
+                            color: #666;
+                            text-align: justify;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="preview-container">
+                        <img src="your-image-url-here.png" alt="Preview Image" class="preview-image">
+                        <h1>Your Post Title</h1>
+                        <div>${content}</div>
+                    </div>
+                </body>
+                </html>
+            `);
+            previewWindow.document.close();
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(sup.gif);
+    overflow: auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.content {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 20px; /* Adjust space between left and right containers */
+    width: 100%;
+}
+
+.left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 150px; /* Increase logo size */
+    height: auto;
+}
+
+.app-name {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.app-name h1,
+.app-name p {
+    margin: 0;
+    font-size: 24px; /* Adjust text size */
+}
+
+.app-name h1 {
+    font-size: 48px; /* Larger text size for app name */
+}
+
+.app-name p {
+    font-size: 24px; /* Larger text size for tagline */
+}
+
+.right {
+    max-width: 400px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 150, 136, 0.8); /* Glow effect */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center content horizontally */
+}
+
+.right .top-logo {
+    width: 100px; /* Adjust logo size inside the card */
+    height: auto;
+    margin-bottom: 20px; /* Space between logo and heading */
+}
+
+.card {
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    width: 100%;
+    max-width: 350px; /* Adjust as needed */
+    padding: 20px; /* Add padding to the card */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.5); /* Semi-transparent border */
+    border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding is included in width */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.3); /* Transparent background */
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Glow effect */
+}
+
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Semi-transparent placeholder text */
+    opacity: 1; /* Ensure placeholder is fully opaque */
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+input[type="text"]:hover::placeholder,
+input[type="email"]:hover::placeholder,
+input[type="password"]:hover::placeholder {
+    color: rgba(255, 255, 255, 1); /* Full opacity on hover */
+    transform: scale(1.05); /* Pop effect */
+}
+
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="password"]:hover {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.8); /* Glow effect on hover */
+    transform: scale(1.02); /* Slightly larger on hover */
+}
+
+button {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+button:hover {
+    background: linear-gradient(135deg, #0056b3, #003d7a);
+}
+
+.or {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.google-button {
+    background-color: #fff;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.google-button img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.google-button:hover {
+    background-color: #f2f2f2;
+}
